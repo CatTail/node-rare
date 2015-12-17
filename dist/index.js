@@ -19,7 +19,6 @@ module.exports = function createRare() {
             hasMatch = entries.some(function (entry) {
                 if (entry.key === arg || arg !== arg && entry.key !== entry.key) {
                     match = entry;
-                    entries = entry.entries;
                     return true;
                 }
             });
@@ -31,6 +30,7 @@ module.exports = function createRare() {
                 };
                 entries.push(match);
             }
+            entries = match.entries;
         });
         debug('map', map);
         return match.value;
