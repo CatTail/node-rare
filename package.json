@@ -2,7 +2,7 @@
   "name": "rare",
   "description": "Unique identifier generator for any value, even list of value",
   "repository": "CatTail/node-rare",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "keywords": [],
   "files": [
     "dist"
