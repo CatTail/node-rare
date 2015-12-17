@@ -4,7 +4,15 @@
 
 ## Installation
 
+    npm install --save rare
+
 ## Usage
+
+    var createRare = require('rare')
+    var rare = createRare()
+    var id1 = rare('something')
+    var id2 = rare(42)
+    var id3 = rare({}, 'hello world')
 
 ## License
 
