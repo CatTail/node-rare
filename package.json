@@ -5,8 +5,7 @@
   "version": "1.0.0",
   "keywords": [],
   "files": [
-    "index.js",
-    "lib"
+    "dist"
   ],
   "main": "dist/index.js",
   "devDependencies": {
