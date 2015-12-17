@@ -30,6 +30,7 @@ describe('Rare', function() {
         should(rare('a', 'b')).be.not.equal(rare('a'))
         should(rare('a', 'b')).be.not.equal(rare('a', 'a'))
         should(rare('a', 'b')).be.equal(rare('a', 'b'))
+        should(rare('a', {})).be.not.equal('a', {})
     })
 
     it('should handle without arguments', function() {

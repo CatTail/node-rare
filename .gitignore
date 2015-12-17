@@ -1,6 +1,8 @@
 node_modules
 coverage
 
+.vscode
+
 !dist
 dist/*
 !dist/index.js
