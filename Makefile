@@ -9,7 +9,7 @@ dist/ts/index.js: index.ts
 watch:
 	fswatch -o index.ts | xargs -n1 -I{} make
 
-test:
+test: build
 	npm test
 
 clean:

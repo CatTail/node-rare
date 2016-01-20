@@ -1,9 +1,10 @@
-///<reference path="typings/debug/debug.d.ts"/> 
+///<reference path="typings/tsd.d.ts"/> 
 import * as Debug from 'debug'
 var debug = Debug('rare')
+import * as _ from 'lodash'
 
 /**
- * map structure after query rare('a', {key: 'value})
+ * map structure after query rare('a', {key: 'value'})
  * [
  *   {
  *     key: 'a',
@@ -26,15 +27,26 @@ interface Entry {
     entries: Array<Entry>
 }
 
-export = function createRare() {
+interface Options {
+    deep: boolean
+}
+
+var equal = (value, other) => value === other
+
+var deepEqual = _.isEqual
+
+export = function createRare(options: Options) {
     var map: Array<Entry> = [], lastId = 1
+    var deep = options && options.deep
+    var compare = deep ? deepEqual : equal
     function rare(...args: any[]): number {
         if (args.length === 0) return 0
                 
         var entries = map, match: Entry, hasMatch
         args.forEach(arg => {
             hasMatch = entries.some(entry => {
-                if (entry.key === arg || arg !== arg && entry.key !== entry.key) {
+                // equal or NaN
+                if (compare(entry.key, arg) || arg !== arg && entry.key !== entry.key) {
                     match = entry
                     return true
                 }

@@ -14,6 +14,8 @@
     var id2 = rare(42)
     var id3 = rare({}, 'hello world')
 
+See [tests](test/index.js) for more example.
+
 ## License
 
 MIT
