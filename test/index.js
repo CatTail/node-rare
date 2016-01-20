@@ -30,7 +30,7 @@ describe('Rare', function() {
         should(rare('a', 'b')).be.not.equal(rare('a'))
         should(rare('a', 'b')).be.not.equal(rare('a', 'a'))
         should(rare('a', 'b')).be.equal(rare('a', 'b'))
-        should(rare('a', {})).be.not.equal('a', {})
+        should(rare('a', {})).be.not.equal(rare('a', {}))
     })
 
     it('should handle without arguments', function() {
@@ -40,5 +40,22 @@ describe('Rare', function() {
 
     it('should handle NaN as equal even through NaN !== NaN', function() {
         should(rare(NaN)).be.equal(rare(NaN))
+    })
+
+    it('should allow deep equal', function() {
+        var deepRare = createRare({deep: true})
+
+        // object
+        var arr = [], obj = {}
+        should(deepRare(arr)).be.equal(deepRare(arr))
+        should(deepRare(obj)).be.equal(deepRare(obj))
+        should(deepRare([])).be.equal(deepRare([]))
+        should(deepRare({})).be.equal(deepRare({}))
+
+        // unfixed length
+        should(deepRare('a', 'b')).be.not.equal(deepRare('a'))
+        should(deepRare('a', 'b')).be.not.equal(deepRare('a', 'a'))
+        should(deepRare('a', 'b')).be.equal(deepRare('a', 'b'))
+        should(deepRare('a', {})).be.equal(deepRare('a', {}))
     })
 })

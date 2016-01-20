@@ -1,11 +1,18 @@
 'use strict';
 
-///<reference path="typings/debug/debug.d.ts"/>
+///<reference path="typings/tsd.d.ts"/>
 var Debug = require('debug');
 var debug = Debug('rare');
-module.exports = function createRare() {
+var _ = require('lodash');
+var equal = function equal(value, other) {
+    return value === other;
+};
+var deepEqual = _.isEqual;
+module.exports = function createRare(options) {
     var map = [],
         lastId = 1;
+    var deep = options && options.deep;
+    var compare = deep ? deepEqual : equal;
     function rare() {
         var args = [];
         for (var _i = 0; _i < arguments.length; _i++) {
@@ -17,7 +24,8 @@ module.exports = function createRare() {
             hasMatch;
         args.forEach(function (arg) {
             hasMatch = entries.some(function (entry) {
-                if (entry.key === arg || arg !== arg && entry.key !== entry.key) {
+                // equal or NaN
+                if (compare(entry.key, arg) || arg !== arg && entry.key !== entry.key) {
                     match = entry;
                     return true;
                 }
